@@ -36,7 +36,7 @@ const SearchBar = (props) => {
         (place) =>
             text.length > 2 &&
             place.toLowerCase().includes(text.toLowerCase()) &&
-            text != ''
+            text !== ''
     );
 
     return (

@@ -4,7 +4,6 @@ import { TextureLoader } from 'three/src/loaders/TextureLoader.js';
 import { FlakesTexture } from 'three/examples/jsm/textures/FlakesTexture';
 
 import * as THREE from 'three';
-import { EnvironmentMap } from '@react-three/drei';
 
 const Globe = (props) => {
     const earthRef = useRef();
@@ -25,12 +24,6 @@ const Globe = (props) => {
     );
     const cloudsMap = useLoader(TextureLoader, 'textures/8k_earth_clouds.jpg');
 
-    const flakesTexture = new THREE.CanvasTexture(new FlakesTexture());
-    flakesTexture.wrapS = THREE.RepeatWrapping;
-    flakesTexture.wrapT = THREE.RepeatWrapping;
-    flakesTexture.repeat.x = 10;
-    flakesTexture.repeat.y = 6;
-
     // useFrame(() => {
     //     ref.current.rotation.y += 0.001;
     //     cloudRef.current.rotation.y += 0.0005;
@@ -48,7 +41,13 @@ const Globe = (props) => {
                     side={THREE.DoubleSide}
                 />
             </mesh>
-            <mesh {...props} ref={earthRef} scale={20} receiveShadow={true}>
+            <mesh
+                {...props}
+                ref={earthRef}
+                rotation={[0, 4, 0]}
+                scale={20}
+                receiveShadow={true}
+            >
                 <sphereGeometry args={[1, 64, 64, 0]} />
                 <meshPhongMaterial specularMap={specularMap} />
                 <meshStandardMaterial

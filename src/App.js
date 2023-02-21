@@ -16,7 +16,7 @@ const Scene = (props) => {
                 <Stars />
                 <ambientLight intensity={0.8} />
                 <directionalLight position={[10, 10, 10]} />
-                <Camera />
+                <Camera {...props} />
                 <Globe position={[0, 0, 0]} />
             </Suspense>
         </group>

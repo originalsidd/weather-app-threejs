@@ -1,5 +1,5 @@
 :root {
-  --card-color: rgba(0, 14, 18);
+  --card-color: rgba(0, 14, 18,0.5);
 }
 
 .weather-overlay {
@@ -81,10 +81,16 @@
 }
 
 .card > .card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: var(--card-color);
+  backdrop-filter: blur(1px);
   border-radius: inherit;
   position: absolute;
   inset: 2px;
+  font-family: 'Courier New', Courier, monospace;
   z-index: 2;
 }
 
@@ -102,12 +108,12 @@
   justify-content: center;
   align-items: center;
   margin: 10px;
-  padding: 5px;
-  padding-right: 10px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  padding-left: 5px;
+  background-color:  rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(0, 0, 0, 0.3);
   border-radius: 20px;
   transition: 0.2s;
+  height: 40px;
 }
 
 .search-bar {
@@ -124,7 +130,7 @@
 }
 
 .search:hover  {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.1);
   color:rgba(255, 255, 255, 1);
   transition: 0.2s;
 }
@@ -132,15 +138,14 @@
 .search-icon {
   display: flex;
   justify-content: center;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 10px;
+  border-radius: 20px;
   align-items: center;
-  height: 30px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
 }
 
 .search-icon:hover {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   color:rgba(255, 255, 255, 1);
   transition: 0.2s;
 }

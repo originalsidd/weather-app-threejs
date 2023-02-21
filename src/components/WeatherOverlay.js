@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 const WeatherOverlay = (props) => {
-    const weather = props.weatherDetails;
-    console.log(weather);
+    const [temp, setTemp] = useState(0);
+    const [name, setName] = useState('');
     const handleMouseMove = (e, card) => {
         const rect = card.getBoundingClientRect(),
             x = e.clientX - rect.left,
@@ -25,12 +25,23 @@ const WeatherOverlay = (props) => {
         };
     }, []);
 
+    useEffect(() => {
+        if (props.weatherDetails) {
+            setTemp(Math.round(props.weatherDetails.main.temp - 273.15));
+            console.log(props.weatherDetails);
+            setName(props.weatherDetails.name);
+        }
+    }, [props.weatherDetails]);
+
     return (
         <div className='weather-overlay'>
             <div className='card-container'>
                 <div className='cards'>
                     <div className='card'>
-                        <div className='card-content'>{weather.main.temp}</div>
+                        <div className='card-content'>
+                            <div className='big-text'>{name}</div>
+                            <div className='big-text'>{temp}°C</div>
+                        </div>
                     </div>
                     <div className='card'>
                         <div className='card-content'></div>
