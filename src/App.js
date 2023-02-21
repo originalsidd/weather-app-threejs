@@ -22,14 +22,25 @@ const Scene = (props) => {
         </group>
     );
 };
+
 const App = () => {
+    const [lat, setLat] = useState(null);
+    const [long, setLong] = useState(null);
+    const [weatherDetails, setWeatherDetails] = useState();
+
     return (
         <>
-            <SearchBar />
+            <SearchBar
+                lat={lat}
+                lon={long}
+                setLat={setLat}
+                setLong={setLong}
+                setWeatherDetails={setWeatherDetails}
+            />
             <Canvas style={{ position: 'absolute' }}>
-                <Scene />
+                <Scene lat={lat} lon={long} />
             </Canvas>
-            <WeatherOverlay />
+            <WeatherOverlay weatherDetails={weatherDetails} />
         </>
     );
 };

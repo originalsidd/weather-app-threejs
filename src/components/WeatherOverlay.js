@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-const WeatherOverlay = () => {
+const WeatherOverlay = (props) => {
+    const weather = props.weatherDetails;
+    console.log(weather);
     const handleMouseMove = (e, card) => {
         const rect = card.getBoundingClientRect(),
             x = e.clientX - rect.left,
@@ -28,7 +30,7 @@ const WeatherOverlay = () => {
             <div className='card-container'>
                 <div className='cards'>
                     <div className='card'>
-                        <div className='card-content'></div>
+                        <div className='card-content'>{weather.main.temp}</div>
                     </div>
                     <div className='card'>
                         <div className='card-content'></div>

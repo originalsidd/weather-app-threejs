@@ -5,7 +5,8 @@ Weather App with live 3d Earth and weather information around the globe.
 ## Timeline
 
 -   Develop Skeleton of world and dashboard ✅
--   Implement API and search info.
+-   Implement API and search info ✅
+-   Dashboard Finishing
 -   Map coordinates to 3D Sphere
 -   Camera Animation
 -   Final Product Release!
