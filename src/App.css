@@ -1,38 +1,120 @@
-.App {
-  text-align: center;
+:root {
+  --card-color: rgba(0, 14, 18);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.weather-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  margin-top: 50px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.card-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  right: 20px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  z-index: 1;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.cards {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  /* max-width: 408px; */
+  width: calc(100%-20px);
+}
+
+.cards:hover > .card::after {
+  opacity: 1;
+}
+
+.card {
+  background-color: rgba(255,255,255,0.2);
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+  height: 200px;
+  width: 200px;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card::before,
+.card::after {
+  border-radius: inherit;
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 500ms;
+  left: 0px;
+  top: 0px;
+  z-index: 3;
+}
+
+.card::before {
+  background: radial-gradient(
+    800px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.05),
+    transparent 40%
+  );
+  z-index: 3;
+}
+    
+.card::after {
+  background: radial-gradient(
+    400px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.8),
+    transparent 40%
+  );
+  z-index: 1;
+}
+
+.card > .card-content {
+  background-color: var(--card-color);
+  border-radius: inherit;
+  position: absolute;
+  inset: 2px;
+  z-index: 2;
+}
+
+.search-container {
+  position: absolute;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width: 100%;
+  z-index: 3;
 }
 
-.App-link {
-  color: #61dafb;
+.search {
+  margin: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.search-bar {
+  height: 40px;
+  width: 300px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  padding: 10px;
+  color:rgba(255, 255, 255, 0.8);
+  outline-style: none;
+  backdrop-filter: blur(1px);
+  transition: 0.2s;
+}
+
+.search-bar:focus {
+  background-color: rgba(255, 255, 255, 0.3);
+  color:rgba(255, 255, 255, 1);
+  transition: 0.2s;
 }
