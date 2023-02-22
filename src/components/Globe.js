@@ -44,7 +44,7 @@ const Globe = (props) => {
             <mesh
                 {...props}
                 ref={earthRef}
-                rotation={[0, 4, 0]}
+                rotation={[0, 4.75, 0]}
                 scale={20}
                 receiveShadow={true}
             >

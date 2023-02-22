@@ -73,7 +73,7 @@
     
 .card::after {
   background: radial-gradient(
-    400px circle at var(--mouse-x) var(--mouse-y),
+    500px circle at var(--mouse-x) var(--mouse-y),
     rgba(255, 255, 255, 0.8),
     transparent 40%
   );
@@ -91,6 +91,8 @@
   position: absolute;
   inset: 2px;
   font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 20px;
   z-index: 2;
 }
 
