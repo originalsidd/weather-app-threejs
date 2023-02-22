@@ -3,7 +3,12 @@ import React from 'react';
 const PlaceList = (props) => {
     const placeArray = props.places.map((place) => {
         return (
-            <div className='place' onClick={() => props.setText(place)}>
+            <div
+                className='place'
+                onClick={() => {
+                    props.handleSearch(place);
+                }}
+            >
                 {place}
             </div>
         );

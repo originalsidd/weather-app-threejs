@@ -12,7 +12,6 @@ import './App.css';
 const Scene = (props) => {
     const lightRef = useRef();
     const date = new Date();
-    console.log(date);
     let dayOfYear = Math.floor(
         (date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24
     );
@@ -22,7 +21,7 @@ const Scene = (props) => {
     } else {
         dayOfYear -= 172 / 2;
     }
-    console.log(dayOfYear);
+    let lightAxisAngle = dayOfYear / 5.6275;
     // 172 until summer solstice
     // 356 until winter solstice
     // can devise function like x-172/2 % 172
@@ -32,7 +31,7 @@ const Scene = (props) => {
     // 86 -> 15.282 mapping
     // 5.6275 ratio
 
-    // degree calculated from seconds of Greenwich time and placing sun
+    // degree calculated from seconds of Greenwich time and placing sun overhead
 
     useFrame(() => {
         const time = new Date();
@@ -43,19 +42,20 @@ const Scene = (props) => {
         const degree = ((seconds - 43200) / 86400) * 360;
         if (lightRef.current) {
             lightRef.current.position.x =
-                -10 * Math.cos(THREE.MathUtils.degToRad(degree));
+                -10 * Math.sin(THREE.MathUtils.degToRad(degree));
             lightRef.current.position.z =
-                10 * Math.sin(THREE.MathUtils.degToRad(degree));
+                10 * Math.cos(THREE.MathUtils.degToRad(degree));
         }
     });
     return (
         <group>
             <Suspense fallback={<Loader />}>
                 <Stars />
-                <ambientLight intensity={0.2} />
+                <ambientLight intensity={0.4} />
                 <directionalLight
                     ref={lightRef}
-                    position={[10, dayOfYear / 5.6275, 10]}
+                    position={[10, lightAxisAngle, 0]}
+                    intensity={1}
                 />
                 <Camera {...props} />
                 <Globe position={[0, 0, 0]} />

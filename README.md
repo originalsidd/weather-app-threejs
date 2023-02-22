@@ -6,9 +6,14 @@ Weather App with live 3d Earth and weather information around the globe.
 
 -   Develop Skeleton of world and dashboard ✅
 -   Implement API and search info ✅
--   Dashboard Finishing
--   Map coordinates to 3D Sphere
--   Camera Animation
+-   Map coordinates to 3D Sphere ✅
+-   Axis and light mapping ✅
+-   Camera Animation ✅
+-   Search Utility (Trie) and Design ✅
+-   Dashboard Designing ✅
+-   Dashboard Functions and Utilities ✅
+-   Dashboard Finishing ✅
+-   Mobile View
 -   Final Product Release!
 
 <!-- ## Screenshots

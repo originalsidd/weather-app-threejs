@@ -10,23 +10,36 @@ import * as THREE from 'three';
 
 const Camera = (props) => {
     const ref = useRef();
+    const [flag, setFlag] = useState(true);
     const vec = new THREE.Vector3();
 
     useFrame(() => {
         if (props.lat) {
-            // ref.current.position.lerp(
-            //     vec.set(
-            //         12 + 20 * Math.cos(THREE.MathUtils.degToRad(props.lon)),
-            //         20 + 20 * Math.sin(props.lat),
-            //         12 + 20 * Math.sin(THREE.MathUtils.degToRad(props.lon))
-            //     ),
-            //     0.05
-            // );
             ref.current.position.lerp(
-                new THREE.Vector3(
-                    70 * Math.sin(THREE.MathUtils.degToRad(props.lon)),
-                    70 * Math.sin(THREE.MathUtils.degToRad(props.lat)),
-                    70 * Math.cos(THREE.MathUtils.degToRad(props.lon))
+                vec.set(
+                    (50 -
+                        50 *
+                            Math.pow(
+                                Math.sin(
+                                    THREE.MathUtils.degToRad(
+                                        Math.abs(props.lat)
+                                    )
+                                ),
+                                4
+                            )) *
+                        Math.sin(THREE.MathUtils.degToRad(props.lon)),
+                    50 * Math.sin(THREE.MathUtils.degToRad(props.lat)),
+                    (50 -
+                        50 *
+                            Math.pow(
+                                Math.sin(
+                                    THREE.MathUtils.degToRad(
+                                        Math.abs(props.lat)
+                                    )
+                                ),
+                                4
+                            )) *
+                        Math.cos(THREE.MathUtils.degToRad(props.lon))
                 ),
                 0.05
             );
