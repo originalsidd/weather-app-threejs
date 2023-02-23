@@ -8,6 +8,7 @@ const PlaceList = (props) => {
                 onClick={() => {
                     props.handleSearch(place);
                 }}
+                key={place}
             >
                 {place}
             </div>

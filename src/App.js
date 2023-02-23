@@ -1,9 +1,16 @@
 import React, { Suspense, useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame, extend } from '@react-three/fiber';
-import { Stars, Scroll, ScrollControls, Environment } from '@react-three/drei';
+import {
+    Stars,
+    Scroll,
+    ScrollControls,
+    Environment,
+    Html,
+} from '@react-three/drei';
 import Camera from './components/Camera';
 import Globe from './components/Globe';
 import Loader from './components/Loader';
+import Load from './components/Load';
 import SearchBar from './components/SearchBar';
 import WeatherOverlay from './components/WeatherOverlay';
 import * as THREE from 'three';
@@ -49,17 +56,15 @@ const Scene = (props) => {
     });
     return (
         <group>
-            <Suspense fallback={<Loader />}>
-                <Stars />
-                <ambientLight intensity={0.4} />
-                <directionalLight
-                    ref={lightRef}
-                    position={[10, lightAxisAngle, 0]}
-                    intensity={1}
-                />
-                <Camera {...props} />
-                <Globe position={[0, 0, 0]} />
-            </Suspense>
+            <Stars />
+            <ambientLight intensity={0.4} />
+            <directionalLight
+                ref={lightRef}
+                position={[10, lightAxisAngle, 0]}
+                intensity={1}
+            />
+            <Camera {...props} />
+            <Globe position={[0, 0, 0]} />
         </group>
     );
 };
@@ -67,22 +72,44 @@ const Scene = (props) => {
 const App = () => {
     const [lat, setLat] = useState(null);
     const [long, setLong] = useState(null);
-    const [weatherDetails, setWeatherDetails] = useState();
+    const [loading, setLoading] = useState(false);
+    const [intro, setIntro] = useState(false);
+    const [weatherDetails, setWeatherDetails] = useState(null);
+
+    useEffect(() => {
+        setTimeout(() => setLoading(true), 1000);
+        setTimeout(() => setIntro(true), 1000);
+    }, []);
 
     return (
-        <>
-            <SearchBar
-                lat={lat}
-                lon={long}
-                setLat={setLat}
-                setLong={setLong}
-                setWeatherDetails={setWeatherDetails}
-            />
+        <div className='main'>
+            {loading && (
+                <SearchBar
+                    lat={lat}
+                    lon={long}
+                    setLat={setLat}
+                    setLong={setLong}
+                    setWeatherDetails={setWeatherDetails}
+                />
+            )}
+            {intro && weatherDetails === null ? (
+                <div className='intro'>EARTH</div>
+            ) : (
+                <></>
+            )}
+
             <Canvas style={{ position: 'absolute' }}>
-                <Scene lat={lat} lon={long} />
+                <Suspense fallback={<Load />}>
+                    <Scene lat={lat} lon={long} />
+                </Suspense>
             </Canvas>
-            <WeatherOverlay weatherDetails={weatherDetails} />
-        </>
+
+            {weatherDetails !== null ? (
+                <WeatherOverlay weatherDetails={weatherDetails} />
+            ) : (
+                <></>
+            )}
+        </div>
     );
 };
 

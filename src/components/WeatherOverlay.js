@@ -2,15 +2,37 @@ import React, { useEffect, useState } from 'react';
 import icons from './icons.jsx';
 import country_names from '../utils/Countries';
 
+const days = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+];
+
+const ua = window.navigator.userAgent;
+const iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
+const webkit = !!ua.match(/WebKit/i);
+const iOSSafari = iOS && webkit && !ua.match(/CriOS/i);
+
 const WeatherOverlay = (props) => {
     const [icon, setIcon] = useState(null);
     const [drop, setDrop] = useState(false);
-    const [placeTime, setPlaceTime] = useState(null);
     const [details, setDetails] = useState(null);
-    const [h, setH] = useState(0);
-    const [m, setM] = useState(0);
-    const [s, setS] = useState(0);
+    const [day, setDay] = useState('');
+    const [date, setDate] = useState(null);
+    const [time, setTime] = useState(null);
     const [dir, setDir] = useState('');
+
+    useEffect(() => {
+        if (iOSSafari) {
+            const e = document.querySelector('.card-container');
+            e.style.setProperty('padding-bottom', '200px');
+        }
+    }, []);
+
     const handleMouseMove = (e, card) => {
         const rect = card.getBoundingClientRect(),
             x = e.clientX - rect.left,
@@ -18,6 +40,12 @@ const WeatherOverlay = (props) => {
 
         card.style.setProperty('--mouse-x', `${x}px`);
         card.style.setProperty('--mouse-y', `${y}px`);
+    };
+
+    const timeCorrect = (s) => {
+        if (s.length === 1) s = '0' + s;
+        else if (s.length === 0) s = '00';
+        return s;
     };
 
     useEffect(() => {
@@ -47,37 +75,34 @@ const WeatherOverlay = (props) => {
             else if (dir > 247.5 && dir < 292.5) setDir('W');
             else if (dir > 292.5 && dir < 337.5) setDir('NW');
             else setDir('N');
-            console.log(details);
         }
     }, [props.weatherDetails, details]);
 
     useEffect(() => {
         const interval = setInterval(() => {
             if (details) {
-                let time = new Date();
-                let sec =
-                    time.getUTCSeconds() +
-                    60 * time.getUTCMinutes() +
-                    3600 * time.getUTCHours();
-                sec += details.timezone;
-                sec = sec % 86400;
-                let h = parseInt(sec / 3600);
-                sec -= h * 3600;
-                let m = parseInt(sec / 60);
-                sec -= m * 60;
-                let s = sec;
-                h = h.toString();
-                m = m.toString();
-                s = s.toString();
-                if (h.length === 1) h = '0' + h;
-                if (m.length === 1) m = '0' + m;
-                if (s.length === 1) s = '0' + s;
-                if (h.length === 0) h = '00';
-                if (m.length === 0) m = '00';
-                if (s.length === 0) s = '00';
-                setH(h);
-                setM(m);
-                setS(s);
+                const date = new Date();
+                const localTime = date.getTime();
+                const localOffset = date.getTimezoneOffset() * 60000;
+                const utc = localTime + localOffset;
+                const atlanta = utc + 1000 * details.timezone;
+                const new_date = new Date(atlanta);
+                let h = new_date.getHours().toString();
+                let m = new_date.getMinutes().toString();
+                let s = new_date.getSeconds().toString();
+                h = timeCorrect(h);
+                m = timeCorrect(m);
+                s = timeCorrect(s);
+                const settime = h + ':' + m + ':' + s;
+                setTime(settime);
+                setDay(days[new_date.getDay()]);
+                const setdate =
+                    new_date.getDate().toString() +
+                    '/' +
+                    new_date.getMonth().toString() +
+                    '/' +
+                    new_date.getFullYear().toString().slice(2);
+                setDate(setdate);
             }
         }, 1000);
         return () => clearInterval(interval);
@@ -139,10 +164,11 @@ const WeatherOverlay = (props) => {
                     </div>
                     <div className='card'>
                         <div className='card-content'>
-                            <div className='temp-text'>
-                                {h}:{m}:{s}
-                            </div>
+                            <div className='temp-text'>{time}</div>
                             <div className='mid-text'>hh:mm:ss</div>
+                            <br />
+                            <div className='temp-text'>{date}</div>
+                            <div className='mid-text'>{day}</div>
                         </div>
                     </div>
                     <div className='card'>

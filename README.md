@@ -13,16 +13,21 @@ Weather App with live 3d Earth and weather information around the globe.
 -   Dashboard Designing ✅
 -   Dashboard Functions and Utilities ✅
 -   Dashboard Finishing ✅
--   Mobile View
--   Final Product Release!
+-   Mobile View ✅
+-   Loading and Landing Screen ✅
+-   Final Product Release! ✅
 
-<!-- ## Screenshots
+## Screenshots
 
 ### Desktop
 
-### Mobile
+<img src="https://github.com/originalsidd/weather-app-threejs/blob/main/public/pic1.png?raw=true"  />
 
-## Controls -->
+<img src="https://github.com/originalsidd/weather-app-threejs/blob/main/public/pic2.png?raw=true"  />
+
+<!-- ### Mobile -->
+
+<!-- ## Controls -->
 
 ## Usage
 

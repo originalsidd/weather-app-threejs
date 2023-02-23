@@ -18,6 +18,5 @@ for (let country in cityList) {
         trie.map(key, value);
     }
 }
-console.log(trie);
 
 export default trie;

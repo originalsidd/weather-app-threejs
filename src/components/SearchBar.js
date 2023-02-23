@@ -26,18 +26,24 @@ const SearchBar = (props) => {
         fetch(
             `https://api.openweathermap.org/data/2.5/weather?q=${place}&appid=${apikey}`
         )
-            .then((city) => city.json())
-            .then((city) => {
-                props.setLat(city.coord.lat);
-                props.setLong(city.coord.lon);
-                return city;
+            .then((res) => {
+                if (res.ok) return res.json();
+                else if (res.status === 404) {
+                    setMiss(true);
+                    throw new Error('Invalid');
+                }
             })
-            .then((weather) => {
-                props.setWeatherDetails(weather);
+            .then((res) => {
+                props.setLat(res.coord.lat);
+                props.setLong(res.coord.lon);
+                return res;
+            })
+            .then((res) => {
+                props.setWeatherDetails(res);
+                return res;
             })
             .catch((error) => {
                 console.log(error);
-                setMiss(true);
             });
 
         setText('');
@@ -45,20 +51,16 @@ const SearchBar = (props) => {
     };
 
     document.onkeydown = (e) => {
-        if (e.key == 'Enter') {
+        if (e.key === 'Enter') {
             handleSearch(text);
         }
     };
 
-    const filteredPlaces = trie.search(place).sort();
+    const filteredPlaces = trie.search(place).splice(0, 10);
 
     useEffect(() => {
         if (miss) setMiss(false);
     }, [text]);
-
-    useEffect(() => {
-        handleSearch('Delhi');
-    }, []);
 
     return (
         <div className='search-container'>

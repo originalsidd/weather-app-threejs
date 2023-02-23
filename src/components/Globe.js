@@ -44,7 +44,7 @@ const Globe = (props) => {
             <mesh
                 {...props}
                 ref={earthRef}
-                rotation={[0, 4.73, 0]}
+                rotation={[0, 4.713, 0]}
                 scale={20}
                 receiveShadow={true}
             >
@@ -57,21 +57,6 @@ const Globe = (props) => {
                     metalness={0.4}
                 />
             </mesh>
-            {/* <mesh
-                {...props}
-                scale={20}
-                receiveShadow={true}
-                position={[-0.15, -0.15, -0.15]}
-            >
-                <sphereGeometry ref={nightRef} args={[0.999, 64, 64, 0]} />
-                <meshPhongMaterial specularMap={specularMap} />
-                <meshStandardMaterial
-                    map={colorMap2}
-                    normalMap={normalMap}
-                    roughness={0.7}
-                    metalness={0.4}
-                />
-            </mesh> */}
         </>
     );
 };
