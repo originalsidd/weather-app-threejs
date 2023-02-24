@@ -83,7 +83,7 @@ const App = () => {
                 <></>
             )}
 
-            <Suspense fallback={<Load />}>
+            <Suspense fallback={<Load desc={'Earth'} />}>
                 <Canvas style={{ position: 'absolute' }}>
                     <Scene lat={lat} lon={long} />
                 </Canvas>

@@ -8,7 +8,7 @@ const App = React.lazy(() => import('./App'));
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <>
-        <Suspense fallback={<Load />}>
+        <Suspense fallback={<Load desc={'App'} />}>
             <App />
         </Suspense>
     </>
