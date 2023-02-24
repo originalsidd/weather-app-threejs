@@ -1,19 +1,13 @@
 import React, { useRef } from 'react';
-import { useFrame, useLoader } from '@react-three/fiber';
+import { useLoader } from '@react-three/fiber';
 import { TextureLoader } from 'three/src/loaders/TextureLoader.js';
-import { FlakesTexture } from 'three/examples/jsm/textures/FlakesTexture';
 
 import * as THREE from 'three';
 
 const Globe = (props) => {
     const earthRef = useRef();
-    const nightRef = useRef();
     const cloudRef = useRef();
     const colorMap = useLoader(TextureLoader, 'textures/8k_earth_daymap.jpg');
-    const colorMap2 = useLoader(
-        TextureLoader,
-        'textures/8k_earth_nightmap.jpg'
-    );
     const normalMap = useLoader(
         TextureLoader,
         'textures/8k_earth_normal_map.jpg'
@@ -23,11 +17,6 @@ const Globe = (props) => {
         'textures/8k_earth_specular_map.jpg'
     );
     const cloudsMap = useLoader(TextureLoader, 'textures/8k_earth_clouds.jpg');
-
-    // useFrame(() => {
-    //     ref.current.rotation.y += 0.001;
-    //     cloudRef.current.rotation.y += 0.0005;
-    // });
 
     return (
         <>

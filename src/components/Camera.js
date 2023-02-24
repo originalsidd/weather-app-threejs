@@ -1,11 +1,6 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { useFrame, extend, useThree } from '@react-three/fiber';
-import {
-    PerspectiveCamera,
-    useScroll,
-    OrbitControls,
-    lerp,
-} from '@react-three/drei';
+import React, { useRef, useState } from 'react';
+import { useFrame } from '@react-three/fiber';
+import { PerspectiveCamera, OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 
 let a = 50;
@@ -16,7 +11,6 @@ const Camera = (props) => {
     const [flag, setFlag] = useState(true);
     const vec = new THREE.Vector3();
     let width = window.innerWidth;
-    let height = window.innerHeight;
 
     if (width < 800 && flag) {
         a = 80;
@@ -30,7 +24,6 @@ const Camera = (props) => {
 
     useFrame(() => {
         width = window.innerWidth;
-        height = window.innerHeight;
         if (props.lat) {
             ref.current.position.lerp(
                 vec.set(

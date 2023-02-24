@@ -1,15 +1,8 @@
 import React, { Suspense, useRef, useState, useEffect } from 'react';
-import { Canvas, useFrame, extend } from '@react-three/fiber';
-import {
-    Stars,
-    Scroll,
-    ScrollControls,
-    Environment,
-    Html,
-} from '@react-three/drei';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { Stars } from '@react-three/drei';
 import Camera from './components/Camera';
 import Globe from './components/Globe';
-import Loader from './components/Loader';
 import Load from './components/Load';
 import SearchBar from './components/SearchBar';
 import WeatherOverlay from './components/WeatherOverlay';
@@ -72,37 +65,29 @@ const Scene = (props) => {
 const App = () => {
     const [lat, setLat] = useState(null);
     const [long, setLong] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [intro, setIntro] = useState(false);
     const [weatherDetails, setWeatherDetails] = useState(null);
-
-    useEffect(() => {
-        setTimeout(() => setLoading(true), 2000);
-        setTimeout(() => setIntro(true), 2000);
-    }, []);
 
     return (
         <div className='main'>
-            {loading && (
-                <SearchBar
-                    lat={lat}
-                    lon={long}
-                    setLat={setLat}
-                    setLong={setLong}
-                    setWeatherDetails={setWeatherDetails}
-                />
-            )}
-            {intro && weatherDetails === null ? (
+            <SearchBar
+                lat={lat}
+                lon={long}
+                setLat={setLat}
+                setLong={setLong}
+                setWeatherDetails={setWeatherDetails}
+            />
+
+            {weatherDetails === null ? (
                 <div className='intro'>EARTH</div>
             ) : (
                 <></>
             )}
 
-            <Canvas style={{ position: 'absolute' }}>
-                <Suspense fallback={<Load />}>
+            <Suspense fallback={<Load />}>
+                <Canvas style={{ position: 'absolute' }}>
                     <Scene lat={lat} lon={long} />
-                </Suspense>
-            </Canvas>
+                </Canvas>
+            </Suspense>
 
             {weatherDetails !== null ? (
                 <WeatherOverlay weatherDetails={weatherDetails} />
