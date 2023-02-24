@@ -12,11 +12,6 @@ const days = [
     'Saturday',
 ];
 
-const ua = window.navigator.userAgent;
-const iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
-const webkit = !!ua.match(/WebKit/i);
-const iOSSafari = iOS && webkit && !ua.match(/CriOS/i);
-
 const WeatherOverlay = (props) => {
     const [icon, setIcon] = useState(null);
     const [drop, setDrop] = useState(false);
@@ -25,13 +20,6 @@ const WeatherOverlay = (props) => {
     const [date, setDate] = useState(null);
     const [time, setTime] = useState(null);
     const [dir, setDir] = useState('');
-
-    useEffect(() => {
-        if (iOSSafari) {
-            const e = document.querySelector('.card-container');
-            e.style.setProperty('padding-bottom', '200px');
-        }
-    }, []);
 
     const handleMouseMove = (e, card) => {
         const rect = card.getBoundingClientRect(),

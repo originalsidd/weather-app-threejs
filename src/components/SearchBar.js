@@ -10,6 +10,7 @@ const SearchBar = (props) => {
     const [text, setText] = useState('');
     const [place, setPlace] = useState('');
     const [miss, setMiss] = useState(false);
+    const [load, setLoad] = useState(false);
 
     const handleInputChange = (event) => {
         let city = event.target.value;
@@ -23,6 +24,7 @@ const SearchBar = (props) => {
     };
 
     const handleSearch = (place) => {
+        setLoad(true);
         fetch(
             `https://api.openweathermap.org/data/2.5/weather?q=${place}&appid=${apikey}`
         )
@@ -30,6 +32,7 @@ const SearchBar = (props) => {
                 if (res.ok) return res.json();
                 else if (res.status === 404) {
                     setMiss(true);
+                    setLoad(false);
                     throw new Error('Invalid');
                 }
             })
@@ -40,10 +43,12 @@ const SearchBar = (props) => {
             })
             .then((res) => {
                 props.setWeatherDetails(res);
+                setLoad(false);
                 return res;
             })
             .catch((error) => {
                 console.log(error);
+                setLoad(false);
             });
 
         setText('');
@@ -90,6 +95,14 @@ const SearchBar = (props) => {
                 <></>
             )}
             {miss && <div className='error'>Invalid Name: Try Again</div>}
+            {load && (
+                <div className='lds-ellipsis'>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            )}
         </div>
     );
 };

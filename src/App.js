@@ -77,8 +77,8 @@ const App = () => {
     const [weatherDetails, setWeatherDetails] = useState(null);
 
     useEffect(() => {
-        setTimeout(() => setLoading(true), 1000);
-        setTimeout(() => setIntro(true), 1000);
+        setTimeout(() => setLoading(true), 2000);
+        setTimeout(() => setIntro(true), 2000);
     }, []);
 
     return (
