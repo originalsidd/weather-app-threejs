@@ -29,7 +29,9 @@ Weather App with live 3d Earth and weather information around the globe.
 ### Mobile
 
 <center>
+<span>
 <img src="https://github.com/originalsidd/weather-app-threejs/blob/main/public/pic3.png?raw=true" width=200>&nbsp;<img src="https://github.com/originalsidd/weather-app-threejs/blob/main/public/pic4.png?raw=true" width=200>
+</span>
 </center>
 
 ## Controls
