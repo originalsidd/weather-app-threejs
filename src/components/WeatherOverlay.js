@@ -87,7 +87,7 @@ const WeatherOverlay = (props) => {
                 const setdate =
                     new_date.getDate().toString() +
                     '/' +
-                    new_date.getMonth().toString() +
+                    (new_date.getMonth() + 1).toString() +
                     '/' +
                     new_date.getFullYear().toString().slice(2);
                 setDate(setdate);
