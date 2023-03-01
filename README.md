@@ -2,6 +2,8 @@
 
 Weather App with live 3d Earth and weather information around the globe.
 
+Visit Live App: https://weather-app-threejs.vercel.app/
+
 ## Timeline
 
 -   Develop Skeleton of world and dashboard ✅
