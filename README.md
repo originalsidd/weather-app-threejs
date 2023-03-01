@@ -26,13 +26,17 @@ Weather App with live 3d Earth and weather information around the globe.
 
 <img src="https://github.com/originalsidd/weather-app-threejs/blob/main/public/pic2.png?raw=true"  />
 
-<!-- ### Mobile
+### Mobile
 
-<img src="https://github.com/originalsidd/weather-app-threejs/blob/main/public/pic3.png?raw=true"  />
+<center>
+<img src="https://github.com/originalsidd/weather-app-threejs/blob/main/public/pic3.png?raw=true" width=200>&nbsp;<img src="https://github.com/originalsidd/weather-app-threejs/blob/main/public/pic4.png?raw=true" width=200>
+</center>
 
-<img src="https://github.com/originalsidd/weather-app-threejs/blob/main/public/pic4.png?raw=true"  /> -->
+## Controls
 
-<!-- ## Controls -->
+-   Search the weather of any city, state or country using the search bar in top.
+-   Click the search icon/press enter/select the name of the place from the dropdown list.
+-   Analyze weather statistics through the informative dashboard and the visual representation of the particular place on the 3D Earth.
 
 ## Usage
 
